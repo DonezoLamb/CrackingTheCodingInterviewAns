@@ -1,0 +1,17 @@
+#in python
+# question
+#implement an algorithm to find the kth last element in a singly linked list
+
+    def findXthLastNode(self, head, k): #2.2 CCI
+        temp1 = head    #set 2 pointers
+        temp2 = head
+
+        for i in range(k):  #move pointer 1 k away from pointer 2
+            if temp1 == None:   #if error exit
+                print("Error")
+                return
+            temp1 = temp1.next
+        while temp1!= None: #when pointer 1 is null pointer 2 will be at k
+            temp1 = temp1.next
+            temp2 = temp2.next
+        print(temp2.data)
