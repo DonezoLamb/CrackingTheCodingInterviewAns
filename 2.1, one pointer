@@ -1,0 +1,52 @@
+
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+class LinkedList:   # singly linked list
+    def __init__(self):
+        self.head = None
+
+    def add(self, node):
+
+        newNode = Node(node)    # makes new Node object
+
+        if self.head is None:   # adds he first node to the list
+            self.head = newNode
+            return
+
+        else:
+            temp = self.head
+            while temp.next:    # goes through list until at end
+                temp = temp.next
+            temp.next = newNode
+
+    def removeDupes(self):
+        if self.head is None:   # exit if list is empty
+            print("list was empty")
+            return
+
+        else:
+            temp = self.head
+            isSeen = set([temp.value])  # uses a set to keep track of what is in the list, couldve been a hashmap
+            #                             couldve used two pointers instead
+            while temp.next:
+                if temp.next.value in isSeen:
+                    temp.next = temp.next.next
+                else:
+                    isSeen.add(temp.next.value)
+                    temp = temp.next
+        print(isSeen)   # not ordered
+
+
+
+nodesToMake = input("What values do you want inside of the linked list? ").split()
+llist = LinkedList()
+
+for val in nodesToMake:  # fills the list
+    llist.add(val)
+
+print("Removing duplicates...")
+llist.removeDupes()
