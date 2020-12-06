@@ -1,0 +1,25 @@
+
+def isPalindrome(initPhrase):
+    testString = "".join(initPhrase.lower().split())    # removes spaces and makes all char lowercase
+
+    dictionary = {}
+
+    oddCount = 0
+
+    for char in testString:
+        if char in dictionary.keys():
+            dictionary[char] += 1
+            
+            if dictionary[char] % 2 == 1:   # checks if odd count is even
+                oddCount += 1
+            else:
+                oddCount -= 1
+        
+        else:   # initializes char to dictionary 
+            dictionary[char] = 1
+            oddCount += 1   # initial value of key is always odd
+
+    return oddCount <= 1
+
+initString = input("What palindrome would you like to test? ")
+print(isPalindrome(initString))
