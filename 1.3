@@ -1,0 +1,11 @@
+def urlify(modStr):
+    urlStr = ""
+    for char in modStr:
+        if char != " ":
+            urlStr += char
+        else:
+            urlStr += '%20'
+    return urlStr
+
+newStr = input(print("What string do you want to change?\n"))
+print(urlify(newStr))
