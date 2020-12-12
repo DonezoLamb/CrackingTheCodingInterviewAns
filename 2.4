@@ -1,0 +1,60 @@
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+class LinkedList:   # singly linked list
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def add(self, node):
+        newNode = Node(node)    # makes new Node object
+
+        if self.head is None:   # adds he first node to the list
+            self.head = newNode
+            self.tail = newNode
+        else:
+            self.tail.next = newNode
+            self.tail = self.tail.next
+
+        return self.tail
+
+    def print(self):
+        arr = []
+        temp = self.head
+        while temp:
+            arr.append(temp.value)
+            temp = temp.next
+        print(arr)
+
+    def partition(self, pivot):
+        curNode = self.tail = self.head
+
+        while curNode:
+            nextNode = curNode.next
+            curNode.next = None
+            if int(curNode.value) < pivot:
+                curNode.next = self.head
+                self.head = curNode
+            else:
+                self.tail.next = curNode
+                self.tail = curNode
+            curNode = nextNode
+
+        self.tail.next = None   #   exit while loop
+        return self.head
+
+
+
+
+nodesToMake = input("What values do you want inside of the linked list? ").split()
+llist = LinkedList()
+
+for val in nodesToMake:  # fills the list
+    llist.add(val)
+
+llist.print()
+llist.partition(5)
+llist.print()
