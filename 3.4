@@ -1,0 +1,52 @@
+class MyQueue:
+    def __init__(self):
+        self.oldestFirst = []
+        self.newestFirst = []
+
+    def switchStack(self, toOldest):  # depending on function called from either puts array in LIFO or FIFO order
+        if toOldest:
+            while self.newestFirst:  # keeps values from both queues in same order
+                self.oldestFirst.append(self.newestFirst.pop())
+        else:
+            while self.oldestFirst:  # keeps all values in order
+                self.newestFirst.append(self.oldestFirst.pop())
+
+    def add(self, value):  # add element to end of queue
+        self.switchStack(False)
+        self.newestFirst.append(value)
+
+    def print(self):  # print entire queue
+        self.switchStack(True)
+        print(self.oldestFirst)
+
+    def peak(self):  # print top element from queue
+        self.switchStack(True)
+        print(self.oldestFirst[-1])
+
+    def remove(self): # remove oldest element from queue
+        self.switchStack(True)
+        return self.oldestFirst.pop()
+
+    def menu(self):  # menu for testing functions
+        command = input('What would you like to do to your queue?\nYou can "add", "print", '
+                        '"remove", "peak" or "quit" \n')
+        if command == "add":
+            toAdd = input("What do you want to add to your queue? \n").split()
+            for val in toAdd:
+                MQ.add(val)
+        elif command == "print":
+            self.print()
+        elif command == "remove":
+            numToRemove = int(input("How many elements do you want to remove from your queue \n"))
+            for _ in range(numToRemove):
+                MQ.remove()
+        elif command == "peak":
+            self.peak()
+        elif command == "quit":
+            print("Goodbye")
+            exit()
+        self.menu()
+
+
+MQ = MyQueue()
+MQ.menu()
