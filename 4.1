@@ -1,0 +1,51 @@
+class Graph:
+    def __init__(self, val):
+        self.node = val
+        self.adjList = {}
+
+        for node in self.node:
+            self.adjList[node] = []
+
+    def print(self):
+        for node in self.node:
+            print(node, "->", self.adjList[node])
+
+    def addEdgeTwoWay(self, u, v):  # adds an undirected edge
+        self.adjList[u].append(v)
+        self.adjList[v].append(u)
+
+    def addEdgeOneWay(self, start, end):  # adds a directed edge
+        self.adjList[start].append(end)
+
+    def bfs(self, start, target):
+        visited = [start] # has this node been explored?
+        queue = [start] # nodes to explore
+
+        while queue:
+            s = queue.pop(0)  # node currently being explored
+
+            for neighbour in self.adjList[s]: # all attached nodes
+                if neighbour not in visited:  # if node is new
+                    visited.append(neighbour)
+                    queue.append(neighbour)
+                    if neighbour is target: # is this the node were looking for 
+                        return True
+        return False  # nodes are not connected
+
+
+
+
+
+nodes = ["A", "B", "C", "D", "E", "F", "S"]
+
+newGraph = Graph(nodes)
+
+newGraph.addEdgeTwoWay("A", "B")
+newGraph.addEdgeTwoWay("A", "C")
+newGraph.addEdgeTwoWay("B", "C")
+newGraph.addEdgeTwoWay("B", "E")
+newGraph.addEdgeTwoWay("D", "C")
+newGraph.addEdgeTwoWay("S", "C")
+
+newGraph.print()
+print(newGraph.bfs("E", "S"))
