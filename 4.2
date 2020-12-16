@@ -1,0 +1,33 @@
+class Node:
+    def __init__(self, val):
+        self.value = val
+        self.left = None
+        self.right = None
+
+
+class Bst:
+
+    def __init__(self):
+        self.root = None
+        
+    def minimalTree(self, arr):
+        mid = (0 + len(arr-1)) // 2
+        n = Node(arr[mid])
+
+        if self.root == None:
+            self.root = n
+        return self._minimalTree(arr, 0, len(arr)-1)
+
+    def _minimalTree(self, arr, start, end):
+        if end < start:
+            return None
+
+        mid = (start + end) // 2
+        n = Node(arr[mid])
+
+        n.left = self._minimalTree(arr, start, mid-1)
+        n.right = self._minimalTree(arr, mid+1, end)
+        return n
+
+bst = Bst()
+bst.minimalTree([1,2,4,6,8,12,16,22,47])
