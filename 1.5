@@ -1,0 +1,39 @@
+def withinOneEdit(strOne, strTwo):
+    if len(strOne) == len(strTwo):    # len of both strings is the same
+        return charEdit(strOne, strTwo)
+    elif (len(strOne)-len(strTwo)) == 1:    # strOne is one char longer
+        return lenDif(strOne, strTwo)
+    elif (len(strOne)-len(strTwo)) == -1:   # strTwo is one char longer
+        return lenDif(strTwo, strOne)
+    return False
+
+def charEdit(strOne, strTwo):
+    editUsed = False
+    for i in range(len(strOne)):
+        if strOne[i] != strTwo[i]:
+            if editUsed:    # has there been more than one difference?
+                return False
+            else:
+                editUsed = True
+    return True
+
+
+def lenDif(longerStr, shorterStr):
+    editUsed = False
+    longerIndex = 0
+    shorterIndex = 0
+
+    while longerIndex < len(longerStr) and shorterIndex < len(shorterStr):
+        if longerStr[longerIndex] != shorterStr[shorterIndex]:
+            if editUsed:
+                return False
+            else:
+                longerIndex += 1    # check if the next char matches
+                editUsed = True
+        else:
+            shorterIndex += 1
+            longerIndex += 1
+    return True
+
+
+print(withinOneEdit("ThanksForReading", "ThankForReading"))
