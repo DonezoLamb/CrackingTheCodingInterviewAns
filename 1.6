@@ -1,0 +1,15 @@
+def compressString(ogString):
+    compressedStr = ''
+    charInARow = 0
+    
+    for i in range(len(ogString)):
+        charInARow += 1
+        if i + 1 >= len(ogString) or ogString[i + 1] != ogString[i]:
+            compressedStr += ogString[i] + str(charInARow)
+            charInARow = 0
+
+    if len(compressedStr) >= len(ogString):
+        return ogString
+    return compressedStr
+
+print(compressString("aabbbcddeeeeee"))
