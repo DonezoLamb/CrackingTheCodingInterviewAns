@@ -1,0 +1,13 @@
+def waysToClimb(totalSteps):
+    if totalSteps == 0 or totalSteps == 1:
+        return 1
+    steps = [None] * (totalSteps + 1)
+    steps[0] = 1
+    steps[1] = 1
+    steps[2] = 2  # sets up base bases
+
+    for i in range(3, totalSteps + 1):
+        steps[i] = steps[i - 1] + steps[i - 2] + steps[i - 3]
+    return steps[totalSteps]
+
+print(waysToClimb(10))
