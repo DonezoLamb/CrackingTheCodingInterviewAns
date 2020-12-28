@@ -1,0 +1,15 @@
+def sameChar(str1, str2):
+    if len(str1) != len(str2):
+        return False
+
+    sortedStr1 = ''.join(sorted(str1))
+    sortedStr2 = ''.join(sorted(str2))
+
+    for i in range(len(sortedStr1)):
+        if sortedStr1[i] != sortedStr2[i]:
+            return False
+
+    return True
+
+print(sameChar("asdzxc", "asdzxc"))
+
