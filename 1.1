@@ -1,0 +1,10 @@
+def onlyUniqueChar(str):
+    charDict = {}
+    for i in range(len(str)):
+        if str[i] in charDict:
+            return False
+        charDict[str[i]] = True
+    return True
+
+print(onlyUniqueChar("asdfgh1!A"))
+
