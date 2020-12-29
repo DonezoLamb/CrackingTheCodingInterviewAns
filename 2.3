@@ -1,0 +1,58 @@
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+class LinkedList:   # singly linked list
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def add(self, node):
+
+        if self.head is None:   # adds he first node to the list
+            self.head = Node(node)    # makes new Node object
+            self.tail = self.head
+            return
+        else:
+            self.tail.next = Node(node)
+            self.tail = self.tail.next
+        return self.tail
+
+    def print(self):
+        arr = []
+        temp = self.head
+        while temp:
+            arr.append(temp.value)
+            temp = temp.next
+        print(arr)
+
+    def removeMid(self, nodeToErase):  #specific answer to 2.3
+        if nodeToErase.next is None:
+            return False
+
+        nodeToErase.value = nodeToErase.next.value
+        nodeToErase.next = nodeToErase.next.next
+        return True
+
+
+
+
+nodesToMake = input("What values do you want at the front of the linked list? ").split()
+llist = LinkedList()
+
+for val in nodesToMake:  # fills the list
+    llist.add(val)
+
+midNode = llist.add(input("what do you want the middle value to be? "))
+
+
+nodesToMake = input("What values do you want at the end of the linked list? ").split()
+for val in nodesToMake:  # fills the list
+    llist.add(val)
+
+llist.print()
+llist.removeMid(midNode)
+llist.print()
+
